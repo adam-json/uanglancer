@@ -11,5 +11,5 @@ A Python tool that reads my Upwork transaction report, calculates earnings, fees
 
 ## How to run
 
-python -m pip install pandas requests
-python tracker.py
+-python -m pip install pandas requests
+-python tracker.py
