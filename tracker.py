@@ -18,6 +18,44 @@ def compute_totals(df):
     net = gross + fees + connects
     return {'gross': gross, 'fees': fees, 'connects': connects, 'net': net}
 
+def compute_tax_umkm(gross_idr):
+    # PP 55/2022: first Rp 500 million revenue is exempt for individual UMKM
+    # 0.5% final tax on revenue above that
+    exempt = 500_000_000
+    taxable = max(0, gross_idr - exempt)
+    return taxable * 0.005
+
+def compute_tax_nppn(gross_idr, ptkp=54_000_000, nppn_ratio=0.5):
+    net_income = gross_idr * nppn_ratio
+    taxable = max(0, net_income - ptkp)
+
+    brackets = [
+        (60_000_000, 0.05),
+        (250_000_000, 0.15),
+        (500_000_000, 0.25),
+        (5_000_000_000, 0.30),
+        (float('inf'), 0.35),
+    ]
+
+    tax = 0
+    lower = 0
+    for upper, rate in brackets:
+        if taxable <= lower:
+            break
+        layer = min(taxable, upper) - lower
+        tax += layer * rate
+        lower = upper
+
+    return tax
+
+def compare_tax_schemes(gross_idr):
+    umkm = compute_tax_umkm(gross_idr)
+    nppn = compute_tax_nppn(gross_idr)
+    return {
+        'umkm': umkm,
+        'nppn': nppn,
+        'cheaper': 'umkm' if umkm <= nppn else 'nppn',
+    }
 
 def save_summary(totals, rate, path):
     with open(path, "w") as f:
@@ -89,6 +127,15 @@ def main():
     print("\n--- By Month ---")
     for month, amount in monthly.items():
         print(f"{month}:  ${amount:>8.2f}")
+
+    gross_idr = totals['gross'] * rate
+    schemes = compare_tax_schemes(gross_idr)
+
+    print(f"\n--- Tax Estimate ---")
+    print(f"Gross revenue:   Rp {gross_idr:,.0f}")
+    print(f"UMKM 0.5%:       Rp {schemes['umkm']:,.0f}")
+    print(f"NPPN + brackets: Rp {schemes['nppn']:,.0f}")
+    print(f"Cheaper:         {schemes['cheaper'].upper()}")
 
 
 if __name__ == "__main__":
