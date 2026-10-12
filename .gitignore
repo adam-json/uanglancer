@@ -1,12 +1,19 @@
+# Python
 __pycache__/
 *.pyc
+
+# Editors
 .vscode/
 .idea/
+
+# Virtual environments
 venv/
 env/
 
-# Data files — contains private financial info
+# Data files — private financial info
 data/*.csv
+!data/.gitkeep
 
 # Generated output
-output/
+output/*
+!output/.gitkeep
