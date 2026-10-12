@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+venv/
+env/
+
+# Data files — contains private financial info
+data/*.csv
+
+# Generated output
+output/
