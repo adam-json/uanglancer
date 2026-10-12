@@ -1,6 +1,6 @@
 # Upwork Tracker
 
-A Python tool that reads my Upwork transaction report, calculates earnings, fees, and Connects spending, and converts everything to IDR.
+A personal Python tool that reads my Upwork transaction report, calculates earnings, fees, and Connects spending, and converts everything to IDR.
 
 ## Features
 
