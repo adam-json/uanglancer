@@ -79,9 +79,11 @@ print(df['Date'].dtype)
 
 monthly = df.groupby(df['Date'].dt.to_period('M'))['Amount $'].sum()
 print("\n--- By Month (all transactions) ---")
-print(monthly)
+for month, amount in monthly.items():
+    print(f"{month}:  ${amount:>8.2f}")
 
 non_payments = df[df['Transaction type'] != 'Payment']
 monthly = non_payments.groupby(non_payments['Date'].dt.to_period('M'))['Amount $'].sum()
 print("\n--- By Month (excluding transfers) ---")
-print(monthly)
+for month, amount in monthly.items():
+    print(f"{month}:  ${amount:>8.2f}")
