@@ -4,6 +4,8 @@ A Python tool for Indonesian Upwork freelancers. Reads your Upwork transaction r
 
 Runs as both a command-line tool and a Streamlit web app.
 
+![Dashboard](screenshot.png)
+
 ## Features
 
 - Auto-detects newest report from Downloads
