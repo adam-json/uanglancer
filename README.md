@@ -8,6 +8,7 @@ A personal Python tool that reads my Upwork transaction report, calculates earni
 - Computes gross, fees, Connects, and net earnings
 - Fetches live USD → IDR exchange rate
 - Saves a summary to `output/summary.txt`
+- MKM and NPPN tax calculators
 
 ## How to run
 
