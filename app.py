@@ -88,17 +88,24 @@ else:
 
     st.divider()
 
-    # Top clients
     st.subheader("🏆 Top Clients")
     clients = top_clients(df)
-    st.dataframe(clients, width='stretch')
+    clients_df = clients.reset_index()
+    clients_df.columns = ['Client', 'Earned']
+    clients_df['Earned'] = clients_df['Earned'].apply(lambda x: f"${x:.2f}")
+    st.dataframe(clients_df, width='stretch', hide_index=True)
 
     st.divider()
 
-    # ROI
     st.subheader("🎯 Connects ROI by Month")
-    roi = compute_roi_by_month(df)
-    st.dataframe(roi, width='stretch')
+    roi = compute_roi_by_month(df).reset_index()
+    roi.columns = ['Month', 'Connects Spent', 'Earned', 'Net', 'ROI']
+    roi['Month'] = roi['Month'].astype(str)
+    roi['Connects Spent'] = roi['Connects Spent'].apply(lambda x: f"${x:.2f}")
+    roi['Earned'] = roi['Earned'].apply(lambda x: f"${x:.2f}")
+    roi['Net'] = roi['Net'].apply(lambda x: f"${x:.2f}")
+    roi['ROI'] = roi['ROI'].apply(lambda x: f"{x:.2f}")
+    st.dataframe(roi, width='stretch', hide_index=True)
 
     st.divider()
 
