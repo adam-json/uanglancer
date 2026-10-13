@@ -1,17 +1,22 @@
-# Upwork Tracker
+# Freelance Tracker
 
-A personal Python tool for Indonesian Upwork freelancers. Reads your Upwork transaction report, calculates earnings, fees, and Connects spending, converts to IDR, and estimates tax.
+A Python tool for Indonesian freelancers. Reads your Upwork transaction report, calculates earnings, fees, and Connects spending, converts to IDR, estimates tax, and tracks your Connects ROI.
 
 Runs as both a command-line tool and a Streamlit web app.
 
 ![Dashboard](screenshot.png)
 
+**Live app:** https://upwork-tracker.streamlit.app
+
 ## Features
 
 - Auto-detects newest report from Downloads
 - Computes gross, fees, Connects, net
-- Live USD → IDR rate
-- Month-by-month net
+- Live USD → IDR exchange rate
+- Month-by-month net breakdown
+- Connects ROI by month
+- Top clients by earnings
+- Current balance
 - Tax estimate: UMKM 0.5% and NPPN
 - Saves summary to `output/summary.txt`
 - Web UI with charts
@@ -39,18 +44,6 @@ python -m streamlit run app.py
 ## How to get your CSV
 
 Upwork → Reports → Transaction History → set dates → Export → CSV. It lands in Downloads.
-
-## Project structure
-
-```
-upwork-tracker/
-├── app.py
-├── tracker.py
-├── data/
-├── output/
-├── requirements.txt
-└── README.md
-```
 
 ## Tax note
 
