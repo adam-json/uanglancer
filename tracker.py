@@ -88,7 +88,7 @@ def compare_tax_schemes(gross_idr):
 
 def save_summary(totals, rate, path):
     with open(path, "w") as f:
-        f.write("Upwork Tracker Summary\n")
+        f.write("Uanglancer Summary\n")
         f.write("=" * 30 + "\n\n")
         f.write(f"Gross:    ${totals['gross']:.2f}  (Rp {totals['gross'] * rate:,.0f})\n")
         f.write(f"Fees:     ${totals['fees']:.2f}  (Rp {totals['fees'] * rate:,.0f})\n")

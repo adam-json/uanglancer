@@ -16,11 +16,13 @@ apply_theme("midnight")
 hide_streamlit_defaults()
 
 st.set_page_config(
-    page_title="Upwork ID",
+    page_title="Uanglancer",
     page_icon="💼",
     layout="wide",
 )
 
+st.title("Uanglancer")
+st.caption("Untuk freelancer Indonesia")
 # Force headings to be bold, not italic
 st.markdown(
     """
@@ -34,7 +36,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("Upwork ID")
+st.title("Uanglancer")
 st.caption("Untuk freelancer Indonesia")
 
 uploaded = st.file_uploader("Upload your transaction_report.csv", type="csv")
@@ -118,4 +120,4 @@ else:
     st.bar_chart(monthly, color="#4CAF50", height=300)
 
     st.divider()
-    st.caption("Built with Python + Streamlit · [GitHub](https://github.com/adam-json/upwork-id)")
+    st.caption("Built with Python + Streamlit · [GitHub](https://github.com/adam-json/uanglancer)")
