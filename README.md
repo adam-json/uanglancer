@@ -6,7 +6,7 @@ Runs as both a command-line tool and a Streamlit web app.
 
 ![Dashboard](screenshot.png)
 
-**Live app:** https://upwork-tracker.streamlit.app
+**Live app:** https://upwork-id.streamlit.app
 
 ## Features
 
