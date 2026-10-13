@@ -21,9 +21,6 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("Uanglancer")
-st.caption("Untuk freelancer Indonesia")
-# Force headings to be bold, not italic
 st.markdown(
     """
     <style>
