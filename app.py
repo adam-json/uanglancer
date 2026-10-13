@@ -8,6 +8,7 @@ from tracker import (
     get_current_balance,
     top_clients,
     count_connects,
+    compute_roi_by_month,
 )
 
 st.set_page_config(
@@ -37,7 +38,7 @@ if uploaded:
     st.divider()
     st.subheader("🏆 Top Clients")
     clients = top_clients(df)
-    st.dataframe(clients, use_container_width=True)
+    st.dataframe(clients, width='stretch')
 
     st.subheader("💰 Earnings (USD)")
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -67,6 +68,11 @@ if uploaded:
     col3.metric("Cheaper", schemes['cheaper'].upper())
 
     st.divider()
+    st.subheader("🎯 Connects ROI by Month")
+    roi = compute_roi_by_month(df)
+    st.dataframe(roi, width='stretch')
+
+    st.divider()
 
     st.subheader("📊 Monthly Net")
     non_payments = df[df['Transaction type'] != 'Payment']
@@ -77,6 +83,6 @@ if uploaded:
 
     st.divider()
     st.caption("Built with Python + Streamlit · [GitHub](https://github.com/adam-json/upwork-id)")
-    
+
 if not uploaded:
     st.info("👆 Upload your Upwork transaction_report.csv to see your dashboard.")

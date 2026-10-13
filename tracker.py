@@ -27,6 +27,28 @@ def top_clients(df, n=5):
     clients = clients.sort_values(ascending=False).head(n)
     return clients
 
+def compute_roi_by_month(df):
+    connects_df = df[df['Transaction type'] == 'Connects'].copy()
+    earnings_df = df[df['Transaction type'].isin(['Fixed-price', 'Bonus'])].copy()
+
+    connects_df['Month'] = connects_df['Date'].dt.to_period('M')
+    earnings_df['Month'] = earnings_df['Date'].dt.to_period('M')
+
+    connects_by_month = connects_df.groupby('Month')['Amount $'].sum().abs()
+    earnings_by_month = earnings_df.groupby('Month')['Amount $'].sum()
+
+    result = pd.DataFrame({
+        'Connects Spent': connects_by_month,
+        'Earned': earnings_by_month,
+    }).fillna(0)
+
+    result['Net'] = result['Earned'] - result['Connects Spent']
+    result['ROI'] = result.apply(
+        lambda row: round(row['Earned'] / row['Connects Spent'], 2) if row['Connects Spent'] > 0 else 0,
+        axis=1
+    )
+    return result
+
 def compute_tax_umkm(gross_idr):
     exempt = 500_000_000
     taxable = max(0, gross_idr - exempt)
