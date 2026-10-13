@@ -7,7 +7,7 @@ from tracker import (
     compare_tax_schemes,
     get_current_balance,
     top_clients,
-    count_connects,python -m streamlit run app.py
+    count_connects,
 )
 
 st.set_page_config(
