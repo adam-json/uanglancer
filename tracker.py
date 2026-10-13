@@ -124,12 +124,6 @@ def load_csv(path):
     df['Date'] = pd.to_datetime(df['Date'])
     return df
 
-def top_clients(df, n=5):
-    earnings = df[df['Transaction type'].isin(['Fixed-price', 'Bonus'])]
-    clients = earnings.groupby('Client team')['Amount $'].sum()
-    clients = clients.sort_values(ascending=False).head(n)
-    return clients
-
 def count_connects(df):
     connects_rows = df[df['Transaction type'] == 'Connects']
     # Description 2 looks like "10 Connects fee"
