@@ -1,6 +1,6 @@
 # Upwork Tracker
 
-A Python tool for Indonesian Upwork freelancers. Reads your Upwork transaction report, calculates earnings, fees, and Connects spending, converts to IDR, and estimates tax.
+A personal Python tool for Indonesian Upwork freelancers. Reads your Upwork transaction report, calculates earnings, fees, and Connects spending, converts to IDR, and estimates tax.
 
 Runs as both a command-line tool and a Streamlit web app.
 
