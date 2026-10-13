@@ -17,7 +17,8 @@ def compute_totals(df):
     return {'gross': gross, 'fees': fees, 'connects': connects, 'net': net}
 
 def get_current_balance(df):
-    last_row = df.iloc[-1]
+    df_sorted = df.sort_values('Date')
+    last_row = df_sorted.iloc[-1]
     return last_row['Current balance $']
 
 def top_clients(df, n=5):
