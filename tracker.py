@@ -4,12 +4,10 @@ import shutil
 import requests
 import pandas as pd
 
-
 def get_rate():
     url = "https://open.er-api.com/v6/latest/USD"
     response = requests.get(url)
     return response.json()["rates"]["IDR"]
-
 
 def compute_totals(df):
     gross = df[df['Transaction type'].isin(['Fixed-price', 'Bonus'])]['Amount $'].sum()
@@ -18,9 +16,17 @@ def compute_totals(df):
     net = gross + fees + connects
     return {'gross': gross, 'fees': fees, 'connects': connects, 'net': net}
 
+def get_current_balance(df):
+    last_row = df.iloc[-1]
+    return last_row['Current balance $']
+
+def top_clients(df, n=5):
+    earnings = df[df['Transaction type'].isin(['Fixed-price', 'Bonus'])]
+    clients = earnings.groupby('Client team')['Amount $'].sum()
+    clients = clients.sort_values(ascending=False).head(n)
+    return clients
+
 def compute_tax_umkm(gross_idr):
-    # PP 55/2022: first Rp 500 million revenue is exempt for individual UMKM
-    # 0.5% final tax on revenue above that
     exempt = 500_000_000
     taxable = max(0, gross_idr - exempt)
     return taxable * 0.005
@@ -94,6 +100,19 @@ def load_csv(path):
     df = pd.read_csv(path)
     df['Date'] = pd.to_datetime(df['Date'])
     return df
+
+def top_clients(df, n=5):
+    earnings = df[df['Transaction type'].isin(['Fixed-price', 'Bonus'])]
+    clients = earnings.groupby('Client team')['Amount $'].sum()
+    clients = clients.sort_values(ascending=False).head(n)
+    return clients
+
+def count_connects(df):
+    connects_rows = df[df['Transaction type'] == 'Connects']
+    # Description 2 looks like "10 Connects fee"
+    # Extract the number from the start
+    total = connects_rows['Description 2'].str.extract(r'^(\d+)')[0].astype(float).sum()
+    return int(total)
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
