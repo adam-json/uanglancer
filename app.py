@@ -11,13 +11,13 @@ from tracker import (
 )
 
 st.set_page_config(
-    page_title="Upwork Tracker",
+    page_title="Upwork ID",
     page_icon="💼",
     layout="wide",
 )
 
-st.title("Upwork Tracker")
-st.caption("For Indonesian freelancers")
+st.title("Upwork ID")
+st.caption("Untuk freelancer Indonesia")
 
 uploaded = st.file_uploader("Upload your transaction_report.csv", type="csv")
 
@@ -76,7 +76,7 @@ if uploaded:
     st.bar_chart(monthly, color="#4CAF50", height=300)
 
     st.divider()
-    st.caption("Built with Python + Streamlit · [GitHub](https://github.com/adam-json/upwork-tracker)")
-
+    st.caption("Built with Python + Streamlit · [GitHub](https://github.com/adam-json/upwork-id)")
+    
 if not uploaded:
     st.info("👆 Upload your Upwork transaction_report.csv to see your dashboard.")
